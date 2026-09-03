@@ -1,0 +1,9 @@
+service ref_provision /vendor/bin/ref_provision
+    class hal
+    user root
+    group system root media
+	interface vendor.ref.hardware.RefProvision@1.0::IRefProvision default
+    interface vendor.ref.hardware.RefProvision@1.1::IRefProvision default
+       
+on property:vendor.drm.upd_delflag=1
+    rm  /data/vendor/mediadrm/playready/playready.hds

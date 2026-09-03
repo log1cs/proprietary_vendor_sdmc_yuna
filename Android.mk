@@ -4,8 +4,8 @@
 
 LOCAL_PATH := $(call my-dir)
 
-ifeq ($(TARGET_DEVICE),oppen)
+ifeq ($(TARGET_DEVICE),yuna)
 
-$(call add-radio-file-sha1-checked,radio/bootloader.img,2395ee1b53dbefd53afc6c80403158da51846d79)
+$(call add-radio-file-sha1-checked,radio/bootloader.img,c4d0f5bbb9c8bcecf2f28fa7a3d9c61605f92666)
 
 endif

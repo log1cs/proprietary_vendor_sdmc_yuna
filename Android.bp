@@ -10,7 +10,7 @@ soong_namespace {
 
 cc_prebuilt_library_shared {
     name: "lib_android_keymaster_akeymint_utils",
-    owner: "amlogic",
+    owner: "sdmc",
     strip: {
         none: true,
     },
@@ -37,7 +37,7 @@ cc_prebuilt_library_shared {
 
 cc_prebuilt_library_shared {
     name: "libacppcose_rkp",
-    owner: "amlogic",
+    owner: "sdmc",
     strip: {
         none: true,
     },
@@ -64,7 +64,7 @@ cc_prebuilt_library_shared {
 
 cc_prebuilt_library_shared {
     name: "libakeymint",
-    owner: "amlogic",
+    owner: "sdmc",
     strip: {
         none: true,
     },
@@ -104,7 +104,7 @@ cc_prebuilt_library_shared {
 
 cc_prebuilt_library_shared {
     name: "libakeymint_remote_prov_support",
-    owner: "amlogic",
+    owner: "sdmc",
     strip: {
         none: true,
     },
@@ -136,7 +136,7 @@ cc_prebuilt_library_shared {
 
 cc_prebuilt_library_shared {
     name: "libamavutils",
-    owner: "amlogic",
+    owner: "sdmc",
     strip: {
         none: true,
     },
@@ -165,7 +165,7 @@ cc_prebuilt_library_shared {
 
 cc_prebuilt_library_shared {
     name: "liboemcrypto",
-    owner: "amlogic",
+    owner: "sdmc",
     strip: {
         none: true,
     },
@@ -193,7 +193,7 @@ cc_prebuilt_library_shared {
 
 cc_prebuilt_library_shared {
     name: "libsecmem",
-    owner: "amlogic",
+    owner: "sdmc",
     strip: {
         none: true,
     },
@@ -224,8 +224,65 @@ cc_prebuilt_library_shared {
 }
 
 cc_prebuilt_library_shared {
+    name: "vendor.ref.hardware.RefProvision@1.0",
+    owner: "sdmc",
+    strip: {
+        none: true,
+    },
+    target: {
+        android_arm: {
+            srcs: [
+                "proprietary/vendor/lib/vendor.ref.hardware.RefProvision@1.0.so",
+            ],
+            shared_libs: [
+                "libhidlbase",
+                "liblog",
+                "libutils",
+                "libcutils",
+                "libc++",
+                "libc",
+                "libm",
+                "libdl",
+            ],
+        },
+    },
+    compile_multilib: "32",
+    prefer: true,
+    soc_specific: true,
+}
+
+cc_prebuilt_library_shared {
+    name: "vendor.ref.hardware.RefProvision@1.1",
+    owner: "sdmc",
+    strip: {
+        none: true,
+    },
+    target: {
+        android_arm: {
+            srcs: [
+                "proprietary/vendor/lib/vendor.ref.hardware.RefProvision@1.1.so",
+            ],
+            shared_libs: [
+                "vendor.ref.hardware.RefProvision@1.0",
+                "libhidlbase",
+                "liblog",
+                "libutils",
+                "libcutils",
+                "libc++",
+                "libc",
+                "libm",
+                "libdl",
+            ],
+        },
+    },
+    compile_multilib: "32",
+    prefer: true,
+    soc_specific: true,
+}
+
+cc_prebuilt_library_shared {
     name: "libHwAudio_dcvdec",
-    owner: "amlogic",
+    owner: "sdmc",
     strip: {
         none: true,
     },
@@ -252,7 +309,7 @@ cc_prebuilt_library_shared {
 
 cc_prebuilt_library_shared {
     name: "libHwAudio_dtshd",
-    owner: "amlogic",
+    owner: "sdmc",
     strip: {
         none: true,
     },
@@ -275,7 +332,7 @@ cc_prebuilt_library_shared {
 
 prebuilt_etc_xml {
     name: "android.hardware.oemlock@1.0-service.droidlogic.xml",
-    owner: "amlogic",
+    owner: "sdmc",
     src: "proprietary/vendor/etc/vintf/manifest/android.hardware.oemlock@1.0-service.droidlogic.xml",
     filename_from_src: true,
     sub_dir: "vintf/manifest",
@@ -284,8 +341,17 @@ prebuilt_etc_xml {
 
 prebuilt_etc_xml {
     name: "android.hardware.security.keymint-service-no-rkp.amlogic.xml",
-    owner: "amlogic",
+    owner: "sdmc",
     src: "proprietary/vendor/etc/vintf/manifest/android.hardware.security.keymint-service-no-rkp.amlogic.xml",
+    filename_from_src: true,
+    sub_dir: "vintf/manifest",
+    soc_specific: true,
+}
+
+prebuilt_etc_xml {
+    name: "vendor.ref.hardware.RefProvision@1.1.xml",
+    owner: "sdmc",
+    src: "proprietary/vendor/etc/vintf/manifest/vendor.ref.hardware.RefProvision@1.1.xml",
     filename_from_src: true,
     sub_dir: "vintf/manifest",
     soc_specific: true,
@@ -293,7 +359,7 @@ prebuilt_etc_xml {
 
 cc_prebuilt_binary {
     name: "android.hardware.oemlock@1.0-service.droidlogic",
-    owner: "amlogic",
+    owner: "sdmc",
     target: {
         android_arm: {
             srcs: [
@@ -328,7 +394,7 @@ cc_prebuilt_binary {
 
 cc_prebuilt_binary {
     name: "android.hardware.security.keymint-service.amlogic",
-    owner: "amlogic",
+    owner: "sdmc",
     target: {
         android_arm: {
             srcs: [
@@ -368,5 +434,41 @@ cc_prebuilt_binary {
     },
     prefer: true,
     relative_install_path: "hw",
+    soc_specific: true,
+}
+
+cc_prebuilt_binary {
+    name: "ref_provision",
+    owner: "sdmc",
+    target: {
+        android_arm: {
+            srcs: [
+                "proprietary/vendor/bin/ref_provision",
+            ],
+            shared_libs: [
+                "vendor.ref.hardware.RefProvision@1.0",
+                "vendor.ref.hardware.RefProvision@1.1",
+                "libbase",
+                "libhidlbase",
+                "libhidltransport",
+                "libutils",
+                "libbinder",
+                "libcutils",
+                "liblog",
+                "libprovision",
+                "libziparchive",
+                "libmeson_display_adapter_remote",
+                "libc++",
+                "libc",
+                "libm",
+                "libdl",
+            ],
+        },
+    },
+    compile_multilib: "32",
+    strip: {
+        none: true,
+    },
+    prefer: true,
     soc_specific: true,
 }
